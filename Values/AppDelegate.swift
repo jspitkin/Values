@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var multiplication: UILabel?
     var division: UILabel?
     var modulo: UILabel?
+    
+    var xBinary: UILabel?
+    var yBinary: UILabel?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
@@ -53,11 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         multiplication = UILabel(frame: CGRectMake(130, 300, 200, 30))
         division = UILabel(frame: CGRectMake(130, 340, 200, 30))
         modulo = UILabel(frame: CGRectMake(130, 380, 200, 30))
+        xBinary = UILabel(frame: CGRectMake(100, 420, 200, 30))
+        yBinary = UILabel(frame: CGRectMake(100, 460, 200, 30))
         rootViewController.view.addSubview(addition!)
         rootViewController.view.addSubview(subtraction!)
         rootViewController.view.addSubview(multiplication!)
         rootViewController.view.addSubview(division!)
         rootViewController.view.addSubview(modulo!)
+        rootViewController.view.addSubview(xBinary!)
+        rootViewController.view.addSubview(yBinary!)
         
         xSlider?.minimumValue = 0
         xSlider?.maximumValue = 100
@@ -85,7 +92,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let difference: Int = xSliderValue - ySliderValue
         let product: Int = xSliderValue * ySliderValue
         let quotient: Double = Double(xSliderValue) / Double(ySliderValue)
-        let modulus: Int = xSliderValue % ySliderValue
+        let modulus: String = ySliderValue == 0 ? "Undefined" : String(xSliderValue % ySliderValue)
+        let xBinaryString: String = String(xSliderValue, radix: 2)
+        let yBinaryString: String = String(ySliderValue, radix: 2)
         
         xValue!.text = "\(xSliderValue)"
         yValue!.text = "\(ySliderValue)"
@@ -99,6 +108,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             division!.text = "X / Y: \(Double(round(10000*quotient)/10000))"
         }
         modulo!.text = "X % Y: \(modulus)"
+        xBinary!.text = "X Binary: \(xBinaryString)"
+        yBinary!.text = "Y Binary: \(yBinaryString)"
         
     }
 
